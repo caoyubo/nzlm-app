@@ -1,0 +1,24 @@
+<ion-header-bar align-title="center" class="bar-positive bar-assertive">
+  <div class="buttons">
+    <a href="#/store/{{store_id}}" class="button button-icon icon ion-chevron-left"></a>
+  </div>
+  <h1 class="title">{{title}}</h1>
+</ion-header-bar>
+
+<ion-view>
+  <ion-content >
+    <!-- <ion-refresher> 下拉刷新指令  -->
+    <ion-refresher pulling-text="下拉刷新" on-refresh="storeSearch.doRefresh()"></ion-refresher>
+
+    <div deckgrid source="items" cardTemplate="templates/deckgrid-card.html" class="deckgrid"></div>
+    <div ng-show="storeSearch.moredata"  class="bottom_show"> 亲，数据加载完啦！</div>
+    <!-- ion-infinite-scroll 上拉加载数据指令 distance默认1% nf-if的值为false时，就禁止执行on-infinite  -->
+    <ion-infinite-scroll ng-if="!storeSearch.moredata"  on-infinite="storeSearch.loadMore()" distance="10%" ></ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>
+
+  <div ng-include="'templates/tabs2.html'"></div>
+
+
+

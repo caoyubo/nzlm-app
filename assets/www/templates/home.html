@@ -1,0 +1,59 @@
+<ion-view view-title="农资联盟">
+  <ion-content  >
+    <!--图片轮番效果-->
+    <ion-slide-box  ng-if="imglist" on-slide-changed="slideHasChanged($index)"  class="slidebox"  auto-play="true" slide-interval="3000" delegate-handle="slideimgs" does-continue="true"  >
+      <ion-slide ng-repeat="data in imglist" >
+          <img src="{{imgurl}}{{data.image}}" width="100%"  ng-click="onclick_img('{{data.type}}','{{data.id}}','{{data.url}}')">
+      </ion-slide>
+    </ion-slide-box>
+    <!--图片轮番效果 end-->
+
+
+    <div class="app-category">
+      <ul>
+        <li  class="tangerine"><a href="#/category/1"><i class="iconfont">&#xe600;</i><span>农药</span> </a></li>
+        <li  class="tangerine"><a href="#/category/6808"><i class="iconfont">&#xe609;</i><span>化肥</span> </a></li>
+        <li  class="tangerine"><a href="#/category/6826"><i class="iconfont">&#xe605;</i><span>种子</span> </a></li>
+        <li  class="tangerine"><a href="#/category/6839"><i class="iconfont">&#xe607;</i><span>农具</span> </a></li>
+        <li  class="tangerine"><a href="#/category/6849"><i class="iconfont">&#xe606;</i><span>其他</span> </a></li>
+        <li  class="green"><a href="#/tab/cart"><i class="iconfont">&#xe602;</i><span>购物车</span> </a></li>
+        <li  class="green"><a href="#" act_type="test_function" ng-click="news()"><i class="iconfont">&#xe603;</i><span>农业资讯</span> </a></li>
+        <li  class="green"><a href="#/tab/center" act_type="test_function"><i class="iconfont">&#xe608;</i><span>个人中心</span> </a></li>
+        <li  class="green"><a href="" ng-click="contact()"><i class="iconfont">&#xe604;</i><span>联系我们</span> </a></li>
+      </ul>
+      <div style="display: block;clear: both;height: 0px;width: 0px;"></div>
+    </div>
+
+
+
+    <div class="app-categoryShop" ng-repeat="ng in sale_list">
+      <div class="app-categoryShop-title">
+        <div class="title">{{ng.recommend.name}}</div>
+      </div>
+
+      <div class="app-category-list">
+        <ul>
+          <li  ng-repeat="cat in ng.gc_list"><a href="#/category/{{cat.gc_id}}">{{cat.gc_name}}</a></li>
+        </ul>
+        <div style="display: block;clear: both;height: 0px;width: 0px;"></div>
+      </div>
+
+      <div class="app-categoryShop-list">
+        <ul>
+          <li ng-repeat="shop in ng.goods_list">
+            <a href="#/goods/basic/{{shop.goods_id}}">
+              <div class="item-pic">
+                <img src="{{shop.goods_pic}}" >
+              </div>
+              <div class="shopName">
+                <h2 class="title">{{shop.goods_name}}</h2>
+                <p class="price">￥<text>{{shop.goods_price}}</text></p>
+              </div>
+            </a></li>
+        </ul>
+      </div>
+      <div style="display: block;clear: both;height: 0px;width: 0px;"></div>
+    </div>
+
+  </ion-content>
+</ion-view>

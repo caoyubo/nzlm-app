@@ -1,0 +1,15 @@
+<div class="a-card">
+  <a href="#/goods/basic/spell/{{card.pindan_goods_id}}/{{card.goods_id}}">
+    <img src="img/grey.jpg" data-ng-src="http://tyimage.nzlm.cn/{{card.goods_info.goods_image}}" onerror="this.src='img/grey.jpg';this.onerror=''">
+    <h2>{{card.goods_name}}</h2>
+    <div class="shop-other">
+      <div class="shop-price">
+        <p class="shopPrice">市场价</p>
+        <p class="marketPrice">￥<span>{{card.goods_price}}</span></p>
+      </div>
+      <div class="shop-buy">
+        <a href="#/goods/basic/spell/{{card.pindan_goods_id}}/{{card.goods_id}}">点击拼单</a>
+      </div>
+    </div>
+  </a>
+</div>

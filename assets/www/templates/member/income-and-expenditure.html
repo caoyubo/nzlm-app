@@ -1,0 +1,52 @@
+<ion-header-bar align-title="center" class="bar-positive bar-assertive">
+  <div class="buttons">
+    <a href="javascript:history.back(-1)" class="button button-icon icon ion-chevron-left"></a>
+  </div>
+  <h1 class="title">收支明细</h1>
+</ion-header-bar>
+<ion-view class="funds income-and-expenditure"  >
+  <div class="tab-panel" ng-if="httpType=='ios'" style="top: 64px;">
+    <ul class="btn-list">
+      <Li  ng-repeat="item in classData"  ng-click="expendditureScope.expendiNav($index)"  ng-class="bg[$index]">{{item}}</Li>
+    </ul>
+  </div>
+  <div class="tab-panel" ng-if="httpType!='ios'" >
+    <ul class="btn-list">
+      <Li  ng-repeat="item in classData"  ng-click="expendditureScope.expendiNav($index)"  ng-class="bg[$index]">{{item}}</Li>
+    </ul>
+  </div>
+  <ion-content class="income-and-expenditure-content">
+
+    <ion-refresher pulling-text="下拉刷新" on-refresh="expendditureScope.doRefresh()"></ion-refresher>
+
+
+    <div class="info-list"  ng-if="type==0">
+     <div class="row text-center "   ng-repeat="(id,name)  in items"  ng-click="expendditureScope.onclickItem({{name.trsSeq}},{{name.dealType}})">
+       <div class="col">{{name.dealTime|limitTo:10}}<br>{{name.dealTime|limitTo:-8}}</div>
+       <div class="col" ng-if="name.dealType==0002" style="color:blue;">+{{name.trsAmount}}</div>
+       <div class="col" ng-if="name.dealType==0001" style="color:red;">-{{name.trsAmount}}</div>
+       <div class="col">{{name.memo}}</div>
+      </div>
+    </div>
+
+    <div class="info-list"  ng-if="type==1">
+        <div class="row text-center" ng-repeat="(id,name)  in items"  ng-click="expendditureScope.onclickItem({{name.trsSeq}},{{name.dealType}})">
+          <div class="col">{{name.dealTime|limitTo:10}}<br>{{name.dealTime|limitTo:-8}}</div>
+          <div class="col" style="color:blue;">+{{name.trsAmount}}</div>
+          <div class="col">{{name.memo}}</div>
+        </div>
+    </div>
+
+    <div class="info-list"  ng-if="type==2">
+        <div class="row text-center" ng-repeat="(id,name)  in items"  ng-click="expendditureScope.onclickItem({{name.trsSeq}},{{name.dealType}})">
+          <div class="col">{{name.dealTime|limitTo:10}}<br>{{name.dealTime|limitTo:-8}}</div>
+          <div class="col" style="color:red;">-{{name.trsAmount}}</div>
+          <div class="col">{{name.memo}}</div>
+        </div>
+    </div>
+
+    <div ng-show="expendditureScope.moredata" class="bottom_show"> 亲，数据加载完啦！</div>
+    <ion-infinite-scroll ng-if="!expendditureScope.moredata" on-infinite="expendditureScope.loadMore()"
+                         distance="1%"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

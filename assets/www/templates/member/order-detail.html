@@ -1,0 +1,61 @@
+<ion-view class="funds" view-title="订单详情">
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back"
+       nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content >
+    <div class="orderDetail_bg">
+      状态：{{item.order_info.order_state_desc}}
+      <div class="orderDetail_bg_bootom"></div>
+    </div>
+    <div class="pay_suc">
+      <div class="suc_id">
+        <div class="paysuess_img">
+          <img src="img/ic_car_x.png">
+        </div>
+        <div class="paysuess_text">
+          <h2 class="suc_id_cor">{{item.order_log.log_msg}}</h2>
+          <span>{{item.order_log.log_time*1000 | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+        </div>
+      </div>
+      <div class="suc_id">
+        <div class="paysuess_img">
+          <img src="img/ic_located.png">
+        </div>
+        <div class="paysuess_text">
+          <h2>收货人：{{item.order_common.reciver_name}} {{item.order_common.reciver_info.phone}}</h2>
+          <span> {{item.order_common.reciver_info.address}}</span>
+        </div>
+      </div>
+
+      <div class="order-goods-list" ng-repeat="goodslist in item.extend_order_goods">
+        <div class="order-goods-item" >
+          <div class="row">
+            <div class="col col-20">
+              <img src="{{imgurl+goodslist.goods_image}}" width="50" height="50">
+            </div>
+            <div class="col col-55">
+              {{goodslist.goods_name}}
+            </div>
+            <div class="col text-right col-25">
+              {{goodslist.goods_price}}<br><span style="color:#9b9898;">x{{goodslist.goods_num}}</span>
+              <p ng-if="goodslist.if_cancel"><button  class="cancel" ng-click="order.goods_cancel(goodslist.goods_id)">取消商品</button></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order_date_proice">
+        <span>订单号：{{item.order_info.order_sn}}</span>
+        <span>订单日期：{{item.order_info.add_time*1000 | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+        <span>优惠价：{{item.order_common.voucher_price>0 ? '-':''}}￥{{priceFormat(item.order_common.voucher_price)}}</span>
+        <span class="order_date_proice_cor">订单总价(不含运费):￥{{item.order_info.order_amount}}</span>
+      </div>
+
+
+    </div>
+
+  </ion-content>
+</ion-view>

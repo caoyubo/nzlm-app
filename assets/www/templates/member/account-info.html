@@ -1,0 +1,35 @@
+<ion-view class="funds" view-title="账户信息" >
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back" nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content class="funds-content">
+    <div class="list">
+      <a class="item item-icon-right">
+        <span>昵称： </span>
+        <span style="color: #a8a4a4">{{accountInfoData.acctName}}</span>
+      </a>
+      <a class="item item-icon-right">
+        <span>持卡人姓名： </span>
+        <span style="color: #a8a4a4">{{accountInfoData.bankName}}</span>
+      </a>
+      <a class="item item-icon-right">
+        <span>绑定手机：</span>
+        <span style="color: #a8a4a4">{{accountInfoData.bankPhone}}</span>
+      </a>
+      <a class="item item-icon-right">
+        <span>绑定银行卡： </span>
+        <span style="color: #a8a4a4"  ng-repeat="banknums  in accountInfoData.bankNums">{{banknums}}</span>
+      </a>
+      <a class="item item-icon-right">
+        <span>可用余额： </span>
+        <span style="color: #a8a4a4">{{accountInfoData.availBal}}</span>
+      </a>
+      <a class="item item-icon-right" href="#">
+        <span>冻结余额：</span>
+        <span style="color: #a8a4a4">{{accountInfoData.frozenBal}}</span>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

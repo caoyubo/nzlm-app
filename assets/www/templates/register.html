@@ -1,0 +1,46 @@
+
+
+<ion-view view-title="注册">
+  <ion-content style="top: 40px;">
+    <form name="myForm" >
+      <div class="login_from">
+        <div class="ion-person  input_w"></div>
+        <input name="userName" required type="text" ng-model="username"  placeholder="请输入您的用户名" ng-change="register.change()"/>
+
+      </div>
+
+      <div class="login_from">
+        <div class="ion-locked  input_w"></div>
+        <input name="password" required type="password" ng-model="password"  placeholder="请输入您的密码" ng-change="register.change()"/>
+
+      </div>
+
+      <div class="login_from">
+        <div class="ion-locked  input_w"></div>
+        <input name="repassword" required type="password" ng-model="repassword"  placeholder="请再次输入您的密码" ng-change="register.change()"/>
+
+      </div>
+
+      <div class="login_from">
+        <div class="ion-android-phone-portrait  input_w"></div>
+        <input type="tel" required  name="phone" placeholder="请输入您的手机号码" class="input_border" ng-model="phone" maxlength="11" ng-change="register.change()">
+      </div>
+      <div class="login_from">
+        <div class="ion-android-phone-portrait  input_w"></div>
+        <input type="text" name="code"  placeholder="6位验证码" class="code" ng-model="code" ng-change="register.change()">
+        <button class="button {{classType}} " ng-click="register.verifyCode({{type}})">
+          {{time}}{{registerText}}
+        </button>
+      </div>
+
+      <div class="main_m">
+        <button class="button button-assertive button-block" ng-click="register.registerClick()" >
+          提交
+        </button>
+        <span>申请即视为同意【农资联盟平台服务协议】</span></span>
+      </div>
+    </form>
+    <div class="logo_img">
+    </div>
+  </ion-content>
+</ion-view>

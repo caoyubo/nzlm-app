@@ -1,0 +1,33 @@
+<ion-view class="transfer-others" view-title="转入" >
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back" nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content class="transfer-others-content">
+    <form class="form-container" name="depositFrom" role="form" ng-submit="tran_ctrl.depositPay(tran_ctrl.depositFrom)" novalidate="novalidate">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">金额</span>
+          <input type="number" name="money" ng-model="depositext.money" required ng-pattern="/^-?\d+\.?\d{0,2}$/">
+        </label>
+        <p class="error" ng-messages="depositFrom.money.$error">
+          <b ng-message="required">金额不能为空！</b>
+          <b ng-message="pattern">金额精确到2位</b>
+        </p>
+        <label class="item item-input">
+          <span class="input-label">支付渠道</span>
+            <select style="width:74%;border:none;background: #ffffff;font-size:12px;" name="payType" ng-model="depositext.payType" required>
+              <option value="0">农行渠道</option>
+              <option selected="selected"  value="1">转账机渠道</option>
+              <option value="2">银联渠道</option>
+            </select>
+        </label>
+        <p class="error" ng-messages="depositFrom.payType.$error"><b ng-message="required">请选择支付渠道！</b></p>
+      </div>
+      <button class="button button-full transfer-others-button" type="submit" ng-disabled="depositFrom.$invalid">
+        确认
+      </button>
+    </form>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,41 @@
+<ion-view class="waiting-goods" view-title="确认收货">
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back"
+       nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content class="waiting-goods-content">
+    <div class="receive" ng-repeat="orderlist in receive">
+      <input type="hidden" name="goods_id" value="{{orderlist.goods_id}}">
+      <input type="hidden" name="order_id" value="{{orderlist.order_id}}">
+      <input type="hidden" name="receive_number{{orderlist.goods_id}}" value="{{orderlist.goods_num}}">
+      <h2>{{orderlist}}</h2>
+
+      <div class="receive_num">
+        <span class="receive_num_text">确认数量:</span>
+        <span ng-click="receiveList.decrement('{{orderlist.goods_id}}')" class="select_number_sub">-</span>
+        <span class="count ng-binding   num{{orderlist.goods_id}} "> {{orderlist.goods_num}}</span>
+        <span ng-click="receiveList.increment('{{orderlist.goods_id}}',{{orderlist.goods_num}})"
+              class="select_number_add">+</span>
+        <span class="receive_num_text">购买数量：{{orderlist.goods_num}}</span>
+      </div>
+    </div>
+    <div class="total_c">
+      合计：￥{{order.order_info.order_amount}}
+    </div>
+    <h3 class="receive_title">请为我们的物流司机给予评价！！！</h3>
+
+    <div class="evaluate">
+      <span><input type="radio" name="my" value="2" checked="checked">满意<img src="../img/ic_evaluate_good.png"></span>
+      <span><input type="radio" name="my" value="1">一般<img src="../img/ic_evaluate_common.png"></span>
+      <span><input type="radio" name="my" value="0">不满意<img src="../img/ic_evaluate_bad.png"></span>
+    </div>
+    <div class="button_qr">
+      <button class="button button-full transfer-others-button"  ng-click="receiveList.countersign()">
+        确认
+      </button>
+    </div>
+
+  </ion-content>
+</ion-view>

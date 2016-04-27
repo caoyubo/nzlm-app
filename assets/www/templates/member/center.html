@@ -1,0 +1,44 @@
+<ion-view view-title="个人中心" class="center">
+  <ion-content class="center-content">
+    <div class="row row-no-padding header">
+      <div class="col">
+        <div class="phone-panel padding-left">
+          <img src="img/icon_login_user.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="row tab-list">
+      <div class="col" ui-sref="funds" nav-direction="forward">
+        <img src="img/icon_uc_zjb.png">
+      </div>
+      <div class="col" ui-sref="order-list" nav-direction="forward">
+        <img src="img/icon_uc_order_list.png">
+      </div>
+      <div class="col" ui-sref="red-money">
+        <img src="img/icon_uc_red_packets.png">
+      </div>
+    </div>
+
+    <div class="row tab-list">
+      <div class="col" ui-sref="personal-info" nav-direction="forward">
+        <img src="img/icon_uc_user_info.png">
+      </div>
+      <div class="col" ui-sref="set" nav-direction="forward">
+        <img src="img/icon_uc_settings.png">
+      </div>
+      <div class="col"  ng-click="menber.pre_buy()">
+        <img src="img/icon_uc_pre_buy.png">
+      </div>
+    </div>
+
+    <h4 style="padding-left:10px;">购买历史</h4>
+
+    <div deckgrid source="items" cardTemplate="templates/deckgrid-history.html" class="deckgrid"></div>
+    <div ng-show="menber.moredata"  class="bottom_show"> 亲，数据加载完啦！</div>
+    <!-- ion-infinite-scroll 上拉加载数据指令 distance默认1% nf-if的值为false时，就禁止执行on-infinite  -->
+    <ion-infinite-scroll ng-if="!menber.moredata"  on-infinite="menber.loadMore()" distance="10%" ></ion-infinite-scroll>
+
+
+  </ion-content>
+</ion-view>

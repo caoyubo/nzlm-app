@@ -1,0 +1,22 @@
+<ion-header-bar align-title="center" class="bar-positive bar-assertive">
+  <div class="buttons">
+    <a href="javascript:history.back(-1)" class="button button-icon icon ion-chevron-left"></a>
+  </div>
+  <h1 class="title">订单支付</h1>
+</ion-header-bar>
+<ion-view>
+  <ion-content>
+    <h3 class="payment">请选择支付方式</h3>
+
+    <div class="payment-car">
+      <ul>
+        <li ng-click="pay.payAct('sys')">点击选择-余额支付</li>
+        <li ng-click="pay.payAct('pos')">点击选择-电话转账</li>
+        <li ng-click="pay.payAct('nag')">点击选择-银行转账</li>
+        <li ng-click="pay.payAct('ag')">点击选择-农行转账</li>
+      </ul>
+
+    </div>
+
+  </ion-content>
+</ion-view>

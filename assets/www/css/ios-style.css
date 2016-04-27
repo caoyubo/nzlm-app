@@ -1,0 +1,8 @@
+.deckgrid .column:nth-child(2) {
+    float: left;
+    padding-left: 0.6em;
+    margin-top: -50px;
+}
+#user{
+    top:64px;
+}

@@ -1,0 +1,80 @@
+<ion-header-bar align-title="center" class="bar-positive bar-assertive">
+  <div class="buttons">
+    <a href="javascript:history.back(-1)" class="button button-icon icon ion-chevron-left"></a>
+  </div>
+  <h1 class="title">购物车</h1>
+</ion-header-bar>
+
+<ion-view>
+  <ion-content  direction="y" scrollbar-y="false">
+    <!-- <ion-refresher> 下拉刷新指令  -->
+    <ion-refresher pulling-text="下拉刷新" on-refresh="cart.doRefresh()"></ion-refresher>
+
+    <div class="store" ng-repeat="storeList in store">
+      <h4>
+        <div class="store_check">
+          <div class="squaredFour">
+            <input type="checkbox"    value="0" id="squaredFour{{storeList.store_id}}" name="check"  checked ng-click="cart.storeCheckbox({{storeList.store_id}})"/>
+            <label for="squaredFour{{storeList.store_id}}"></label>
+          </div>
+        </div>
+        <i class="store_shop_i"></i>
+        <span>{{storeList.store_name}}</span>
+
+        <div class="store_edi"></div>
+      </h4>
+      <div class="store_shop_list">
+        <ul>
+          <li ng-repeat="goods_store  in storeList.goods_list" class="cart_{{goods_store.cart_id}}">
+
+            <div class="store_list_check">
+              <div class="squaredFour">
+                <input type="checkbox" class="cart_id" id="squaredFour{{goods_store.cart_id}}" value="" name="check{{storeList.store_id}}" checked  ng-click="cart.checkboxList()" />
+                <label for="squaredFour{{goods_store.cart_id}}"></label>
+                <input type="hidden"  name="cart_id" value="{{goods_store.cart_id}}">
+                <input type="hidden"  class="cart_num{{goods_store.cart_id}}" value="{{goods_store.goods_num }}">
+              </div>
+            </div>
+            <a href="#/goods/basic/{{goods_store.goods_id}}">
+            <img data-ng-src="{{imgurl}}{{goods_store.goods_image}}" width="30%" align="left">
+            </a>
+            <div class="store_shop_list_right">
+              <span><a href="#/goods/basic/{{goods_store.goods_id}}">{{goods_store.goods_name}} </a></span>
+              <dd class="store_proice{{goods_store.cart_id}}">￥<span>{{goods_store.goods_price}}</span></dd>
+              <div class="stroe_num">
+                <span  ng-click="cart.decrement({{goods_store.cart_id}})" class="select_number_sub">-</span>
+                <span class="count cart{{goods_store.cart_id}}">{{goods_store.goods_num }}</span>
+                <span  ng-click="cart.increment({{goods_store.cart_id}})" class="select_number_add">+</span>
+                <span  class="right  remove">
+                 <a  ng-click="cart.cart_Delete({{goods_store.cart_id}})">删除</a>
+                </span>
+              </div>
+            </div>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+    <h4 style="text-align: center;margin-top: 60px;" ng-if="store && store.length<0">
+      购物车没有东西~~
+    </h4>
+
+
+
+  </ion-content>
+</ion-view>
+<ion-footer-bar align-title="center" class="bar-positive bar-assertive">
+  <div class="store_footer">
+    <div class="stroe_qx">
+      <div class="squaredFour">
+        <input type="checkbox" value="0" id="SelectAll"  checked    ng-click="cart.checkbox()"/>
+        <label for="SelectAll"> </label>
+      </div>
+    </div>
+    全选
+    <a  class="Settlement"  ng-click="cart.totalCart()" >结算</a>
+    <div class="store_js">
+      合计： ￥<span>{{sum}}</span>
+    </div>
+  </div>
+</ion-footer-bar>

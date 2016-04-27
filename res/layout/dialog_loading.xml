@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:background="@drawable/bg_loading_dialog"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/ivLoading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/animated_loading_dialog" />
+
+    <TextView
+        android:id="@+id/tvLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/ivLoading"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:text="正在加载数据，请稍候..."
+        android:textColor="#333333"
+        android:textSize="16sp" />
+
+</RelativeLayout>

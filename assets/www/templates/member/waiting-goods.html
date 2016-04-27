@@ -1,0 +1,50 @@
+<ion-view class="waiting-goods" view-title="待收货" >
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back" nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content class="waiting-goods-content">
+    <ion-refresher pulling-text="下拉刷新" on-refresh="orderPay.doRefresh()"></ion-refresher>
+    <div ng-repeat="(id,name) in items">
+      <div class="order-list " ng-repeat="(id_v,name_v)  in name.order_list">
+        <div class="row">
+          <div class="col">
+            {{name_v.store_name}}
+          </div>
+          <div class="col text-right">
+            <button class="button button-small button-outline">查看详情</button>
+          </div>
+        </div>
+        <div class="order-goods-list">
+
+
+          <div class="order-goods-item"  ng-repeat="goodslist in name_v.extend_order_goods">
+            <div class="row">
+              <div class="col col-20">
+                <img src="{{imgurl+goodslist.goods_image}}">
+              </div>
+              <div class="col col-60">
+                {{goodslist.goods_name}}
+              </div>
+              <div class="col text-right col-20">
+                {{goodslist.goods_price}}<br><span style="color:#9b9898;">x{{goodslist.goods_num}}</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <p style="font-size: 10px;">总运费：￥{{name.shipment_fee}}&nbsp;&nbsp;&nbsp;<span style="color:red;">支付单总价：￥{{name_v.order_amount}}</span></p>
+        </div>
+        <div class="row row-no-padding padding-left padding-right">
+          <div class="col text-right">
+            <button class="button button-small light" style="background: #ff7f00;">继续支付</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-show="orderPay.moredata" class="bottom_show"> 亲，数据加载完啦！</div>
+    <ion-infinite-scroll  ng-if="!orderPay.moredata" on-infinite="orderPay.loadMore()" distance="1%"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>

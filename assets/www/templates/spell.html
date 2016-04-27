@@ -1,0 +1,24 @@
+
+<ion-view class="funds" view-title="拼单">
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="#/tab/home" class="button button-icon light icon ion-ios-arrow-back"
+       nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content class="funds-content">
+    <div class="seckill_banner">
+      <img src="{{imgurl+spell.pindan_info.pindan_banner}}">
+    </div>
+
+
+    <div deckgrid source="items" cardTemplate="templates/deckgrid-spell.html" class="deckgrid"></div>
+    <div ng-show="spell.moredata"  class="bottom_show"> 亲，数据加载完啦！</div>
+    <!-- ion-infinite-scroll 上拉加载数据指令 distance默认1% nf-if的值为false时，就禁止执行on-infinite  -->
+    <ion-infinite-scroll ng-if="!spell.moredata"  on-infinite="spell.loadMore()" distance="10%" ></ion-infinite-scroll>
+
+
+
+
+  </ion-content>
+</ion-view>

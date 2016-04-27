@@ -1,0 +1,36 @@
+<ion-view class="transfer-others" view-title="账单详细" >
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back" nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content >
+    <div class="expend-detail">
+        <h2>交易金额</h2>
+      <p ng-if="dealType == 0002" style="color: blue;">+{{item.amount}}</p>
+      <p ng-if="dealType == 0001" style="color: red;">-{{item.amount}}</p>
+    </div>
+    <div class="expend-detail">
+      <div class="expend-detail-left">
+        买家姓名:
+      </div>
+      <div class="expend-detail-right">
+        {{item.buyerName}}
+      </div>
+      <div class="expend-detail-left">
+        类型:
+      </div>
+      <div class="expend-detail-right">
+        {{item.goodsName}}
+      </div>
+      <div class="expend-detail-left">
+        支付号:
+      </div>
+      <div class="expend-detail-right">
+        {{item.orderNo}}
+      </div>
+    </div>
+
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,181 @@
+<ion-header-bar align-title="center" class="bar-positive bar-assertive">
+  <div class="buttons">
+    <a href="javascript:history.back(-1)" class="button button-icon icon ion-chevron-left"></a>
+  </div>
+  <div class="goods_basic">
+    <a  ng-repeat="text in goodsDetailText" ng-click="goods.goodsText($index)"  ng-class="bg[$index]" class="goods_basic_a">{{text}}</a>
+  </div>
+</ion-header-bar>
+<ion-view>
+  <ion-content  delegate-handle="mainScroll" >
+    <!-- <ion-refresher> 下拉刷新指令  -->
+    <ion-refresher pulling-text="下拉刷新" on-refresh="goods.doRefresh()"></ion-refresher>
+
+    <div class="goods_detail  goods_bg"  ng-if="goodsTextType==0">
+      <!--图片轮番效果-->
+      <ion-slide-box ng-if="goods_slide" on-slide-changed="slideHasChanged($index)" class="slidebox" auto-play="true"
+                     slide-interval="4000" delegate-handle="slideimgs" does-continue="true">
+        <ion-slide ng-repeat="data in goods_slide">
+          <a >
+            <img src="{{data}}" width="100%">
+          </a>
+        </ion-slide>
+      </ion-slide-box>
+      <!--图片轮番效果 end-->
+      <div class="goods_info">
+        <h2>
+          {{goods_info.goods_name}}
+        </h2>
+
+        <div class="goods_price" ng-if="type!=2">
+          ￥{{goods_info.goods_price}}
+        </div>
+        <div class="goods_price" ng-if="type==2">
+          ￥{{data.miaosha_info.miaosha_price}}
+        </div>
+
+
+        <div class="goods_market_price " >
+          <dd>市场价：</dd>
+          <s>￥{{goods_info.goods_price}}</s>
+
+          <div class="price_item" ng-if="type==2">
+            <dd>
+              <dl></dl>
+            </dd>
+            <dt>秒杀价</dt>
+          </div>
+        </div>
+
+        <div class="goods_storage" ng-if="type==1">
+          <span>库存：{{goods_info.goods_storage}}</span>
+          <span>月销量：{{goods_info.month_salenum}}</span>
+        </div>
+      </div>
+
+      <section ng-if="type !=1" id="Rush">
+        <p ng-if="type == 2">此商品正在参与秒杀，距离<span ng-if="state==1">开始</span><span
+          ng-if="state==2">结束</span>还有<span>{{time}}</span></p>
+
+        <p ng-if="type == 3">此商品正在参与拼单，距离<span ng-if="state==1">开始</span><span
+          ng-if="state==2">结束</span>还有<span>{{time}}</span></p>
+      </section>
+
+      <section id="s-adds" ng-if="type==3">
+        <div class="postage cell">拼单数量:
+          <text>{{data.pindan_info.pindan_number}}</text>
+        </div>
+        <div class="sales cell">月销量:
+          <text>{{goods_info.month_salenum ||0}}</text>
+          件
+        </div>
+        <hr style="border-bottom:1px solid #ddd;">
+        <h2><span>总拼数</span><span>价格</span></h2>
+        <ul>
+          <Li ng-repeat="item in data.pindan_info.price_list"><span>{{item.min}}-{{item.max == -1? '以上' : item.max}}件</span><span>{{item.price}}元</span></Li>
+        </ul>
+      </section>
+
+      <div class="SelectAttributes" ng-click="goods.SelectAttributes()" ng-if="type==1">
+        选择: <span ng-repeat="specName in goods_info.spec_name">{{specName}}</span>
+      </div>
+
+      <div class="goods_shop">
+        <div class="goods_shop_img">
+          <span><img src="{{store.store_logo}}"></span>
+        </div>
+        <h2>{{store.store_name}}</h2>
+
+        <div class="store_server">
+          <ul>
+            <li ng-repeat="item in data.store_info.store_credit">{{item.text}}<i>{{item.credit}}</i></li>
+            <!--<li>描述相符<i>5</i></li>-->
+            <!--<li>服务态度<i>5</i></li>-->
+            <!--<li>发货速度<i>5</i></li>-->
+          </ul>
+        </div>
+
+        <div class="store_but">
+          <a href="#/store/search/{{goods_info.store_id}}/0/全部商品" class="iconfont_store">&#xe60b; 全部商品</a>
+          <a href="#/store/{{goods_info.store_id}}" class="iconfont_store">&#xe60c; 进入店铺</a>
+        </div>
+      </div>
+
+      <div class="bottom_show  m_5"> 亲，数据加载完啦！</div>
+    </div>
+
+    <div class="detail_body" ng-if="goodsTextType==1">
+      <p ng-bind-html="detail | trustHtml"></p>
+    </div>
+
+    <div class="evaluate" ng-if="goodsTextType==2">
+      <ul>
+        <li   ng-repeat="evaluateLlist in evaluate">
+          <h2> {{evaluateLlist.content}}</h2>
+          <span>{{evaluateLlist.member_name}}</span>
+          <span>{{evaluateLlist.add_time*1000 | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+        </li>
+      </ul>
+    </div>
+  </ion-content>
+
+  <div class="{{class_pro}}">
+  </div>
+
+  <div class="SelectAttributes_info " ng-class="{true:'SelectAttributes_info_show',false:''}[show_select]">
+    <div class="select_img">
+      <img src="{{imgurl}}{{goods_info.goods_image}} ">
+    </div>
+    <div class="select_title">
+      <span class="price" ng-if="type!=2"> ￥{{goods_info.goods_price}}</span>
+      <span class="price" ng-if="type==2"> ￥{{data.miaosha_info.miaosha_price}}</span>
+
+
+      <span class="colse"><img src="img/colse.jpg" ng-click="goods.colse()"> </span>
+      <span ng-if="type==1">库存：<div  class="spec_storage">{{goods_info.goods_storage}}</div></span>
+      <span ng-if="type==2">秒杀数量：{{data.miaosha_info.miaosha_number}}</span>
+      <span ng-if="type==3">拼单数量：{{data.pindan_info.pindan_number}}</span>
+      <span>月销量：{{goods_info.month_salenum}}</span>
+    </div>
+
+    <div class="select_sx" ng-repeat="(id,name) in goods_info.spec_name " id="wrap">
+      <h2>{{name}}</h2>
+
+      <div class="select_item" >
+        <span ng-repeat="spec in spec_list">
+        <label ng-repeat="(id,name) in spec.goods_spec"  ng-click="goods.onlabel({{id}})" class="spec_{{id}}">
+          {{name}}
+          <input type="hidden"  name="spec_goodsId" value="{{spec.goods_id}}">
+          <input type="hidden"  name="spec_goods_storage" value="{{spec.goods_storage}}">
+        </label>
+          </span>
+      </div>
+    </div>
+
+    <div class="select_number">
+      <h2>数量</h2>
+
+      <div rn-stepper></div>
+    </div>
+  </div>
+
+</ion-view>
+<section id="s-actionBar-container">
+  <div id="s-actionbar" class="action-bar mui-flex align-center">
+    <div class="toshop cell  left">
+      <a href="#/store/{{goods_info.store_id}}">进店</a>
+    </div>
+    <div class="addfav cell j-mdv  left" ng-click="goods.add_favorite()">收藏</div>
+    <div ng-if="data.agency_info.is_apply==0">
+      <button class=" cell cart  left" ng-click="goods.cartAdd()" ng-if="type==1" >加入购物车</button>
+      <button class=" cell buy  right" ng-click="goods.buyAct()" ng-style="type==1 || style1">立即购买</button>
+    </div>
+    <div ng-if="data.agency_info && data.agency_info.is_apply!=0" >
+      <button class=" cell buy  left" ng-style="style1" ng-click="goods.apply_agency()" ng-if="data.agency_info.state==0">申请代理</button>
+      <button class=" cell cart right" ng-style="style1" ng-if="data.agency_info.state!=0">审核中..</button>
+    </div>
+  </div>
+</section>
+
+
+

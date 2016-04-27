@@ -1,0 +1,39 @@
+<ion-view class="funds" view-title="秒杀">
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="#/tab/home" class="button button-icon light icon ion-ios-arrow-back"
+       nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content class="funds-content">
+    <div class="seckill_banner">
+      <img src="{{imgurl+secKill.miaosha_info.miaosha_banner}}">
+    </div>
+
+    <div class="seckill_list" ng-repeat="(id,name) in secKill.goods_list">
+      <div class="seckill_list_img">
+        <img src="{{imgurl+name.goods_info.goods_image}}">
+
+          <div class="seckill_kq">
+            <span ng-if="!name.is_start">准备开枪...</span>
+            <span ng-if="name.is_start">开抢啦...</span>
+            <span ng-if="name.is_over">活动结束...</span>
+          </div>
+      </div>
+      <div class="seckill_text">
+        <h2>{{name.goods_info.goods_name}} </h2>
+
+        <div class="seckill_so"><span>每个id限秒{{name.miaosha_limit}}个</span></div>
+
+        <span ng-if="!name.is_start">距离开始还有:</span>
+        <span ng-if="name.is_start">距离结束还有:</span>
+        <span class="seckill_list_time">{{times}}</span>
+        <button class="button button-full transfer-others-button"   ng-click="onbuttom('{{name.miaosha_goods_id}}','{{name.goods_info.goods_id}}')"  >
+          立即抢购
+        </button>
+      </div>
+    </div>
+
+
+  </ion-content>
+</ion-view>

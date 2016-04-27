@@ -1,0 +1,34 @@
+<ion-view class="transfer-others" view-title="转卡" >
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back" nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content class="transfer-others-content">
+    <form class="form-container" name="cardFrom" role="form"  ng-submit="tran_ctrl.card(tran_ctrl.cardFrom)" novalidate="novalidate">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">银行卡账号</span>
+          <input type="text"  name="account" ng-model="card.account"  required>
+        </label>
+        <p class="error" ng-messages="cardFrom.account.$error"><b ng-message="required">对方账号不能为空！</b></p>
+        <label class="item item-input">
+          <span class="input-label">金额</span>
+          <input type="number"   name="money"  ng-model="card.money" required  ng-pattern="/^-?\d+\.?\d{0,2}$/"  >
+        </label>
+        <p class="error" ng-messages="cardFrom.money.$error">
+          <b ng-message="required">金额不能为空！</b>
+          <b ng-message="pattern">金额精确到2位</b>
+        </p>
+        <label class="item item-input">
+          <span class="input-label">支付密码</span>
+          <input type="password"  name="passwords" ng-model="card.password" required>
+        </label>
+        <p class="error" ng-messages="cardFrom.passwords.$error"><b ng-message="required">支付密码不能为空！</b></p>
+      </div>
+      <button class="button button-full transfer-others-button" type="submit" ng-disabled="cardFrom.$invalid" >
+        确认
+      </button>
+    </form>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,38 @@
+<ion-view>
+  <ion-header-bar class="bar-assertive category-header">
+    <a href="javascript:history.back(-1)" class="button button-icon icon ion-chevron-left"></a>
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="请输入关键字" class="search"  ng-model="search_key">
+    </label>
+    <button class="button button-clear" ng-click="search.onclick_searchKeyword()">
+      搜索
+    </button>
+  </ion-header-bar>
+
+  <div class="rows no-padding">
+    <!--一级分类-->
+    <ion-content class="padding-top col-25 category-panel-left"  overflow-scroll="true"  style="overflow:hidden "  >
+      <ion-list class="w-100 class-font-style">
+        <ion-item class="list-tab-bg text-center  " ng-repeat="index in goodsIndex"  ng-class="bg[index.gc_id]"  ng-click="search.onclick_catId({{index.gc_id}})">
+          <label  class="label_active">{{index.gc_name}}</label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+    <!--二级分类-->
+    <ion-content class=" col-75 col-offset-25 assertive-bg category-panel-right"  overflow-scroll="true"  style="overflow:hidden "  >
+      <div class="category-list">
+        <div class="category-second-list col-offset-4"><h4><a href="#/category/{{curr_class.gc_id}}">所有{{curr_class.gc_name}}</a></h4></div>
+        <div class="category-third-list">
+          <ul>
+            <li class="category-third-item" ng-repeat="index_list in child">
+              <p><a href="#/category/{{index_list.gc_id}}">{{index_list.gc_name}}</a> </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </ion-content>
+  </div>
+</ion-view>
+
+

@@ -1,0 +1,35 @@
+<ion-header-bar align-title="center" class="bar-positive bar-assertive">
+  <div class="buttons">
+    <a href="#/category/{{cate_id}}" class="button button-icon icon ion-chevron-left"></a>
+  </div>
+  <div class="goods_basic">
+    <a  href="#/goods/basic/{{goodsId}}" class="goods_basic_a ">商品</a>
+    <a href="#/goods/detail/{{goodsId}}"  class="goods_basic_a">详情</a>
+    <a  href="#/goods/evaluate/{{goodsId}}"  class="goods_basic_a  goods_basic_a_cur">评价</a>
+  </div>
+</ion-header-bar>
+<ion-view>
+  <ion-content>
+    <ion-refresher pulling-text="下拉刷新" on-refresh="goods.doRefresh()"></ion-refresher>
+    <div class="evaluate">
+      <ul>
+        <li   ng-repeat="evaluateLlist in evaluate">
+          <h2> {{evaluateLlist.content}}</h2>
+          <span>{{evaluateLlist.member_name}}</span>
+          <span>{{evaluateLlist.add_time*1000 | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+        </li>
+      </ul>
+    </div>
+  </ion-content>
+</ion-view>
+<section id="s-actionBar-container">
+  <div id="s-actionbar" class="action-bar mui-flex align-center">
+    <div class="toshop cell  left">
+      进店
+      <a href="store-index.html?store_id=13"></a>
+    </div>
+    <div class="addfav cell j-mdv  left">收藏</div>
+    <button class=" cell cart  left"  ng-click="goods.cartAdd(quantity)">加入购物车</button>
+    <button class=" cell buy  left">立即购买</button>
+  </div>
+</section>

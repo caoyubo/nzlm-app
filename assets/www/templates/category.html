@@ -1,0 +1,40 @@
+<ion-header-bar align-title="center" class="bar-positive bar-assertive">
+  <div class="buttons">
+    <a href="javascript:history.back(-1)" class="button button-icon icon ion-chevron-left"></a>
+  </div>
+  <h1 class="title">{{classTitle}}</h1>
+  <a class="button button-clear ion-grid"   href="#/tab/search"></a>
+</ion-header-bar>
+
+<ion-view>
+  <ion-content >
+    <!-- <ion-refresher> 下拉刷新指令  -->
+    <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()"></ion-refresher>
+
+    <div class="J_goods_class">
+      <ul class="goods_class_list">
+        <li class="goods_class_item active" ng-repeat="class in goodsClass">
+          <a style="display: block" href="#/category/{{class.gc_id}}">{{class.gc_name}}</a>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="default_list">
+      <div class=" o_item  "      ng-repeat="item in classData" ng-class="bg[$index]"  ng-click="vm.order_all($index)"  >
+        <span >{{item}}</span>
+        <i></i>
+      </div>
+    </div>
+
+   <div deckgrid source="items" cardTemplate="templates/deckgrid-card.html" class="deckgrid"></div>
+    <div ng-show="vm.moredata"  class="bottom_show"> 亲，数据加载完啦！</div>
+    <!-- ion-infinite-scroll 上拉加载数据指令 distance默认1% nf-if的值为false时，就禁止执行on-infinite  -->
+    <ion-infinite-scroll ng-if="!vm.moredata"  on-infinite="vm.loadMore()" distance="10%" ></ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>
+
+  <div ng-include="'templates/tabs2.html'"></div>
+
+

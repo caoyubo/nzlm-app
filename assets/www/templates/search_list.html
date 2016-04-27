@@ -1,0 +1,46 @@
+<ion-header-bar class="bar-assertive category-header">
+  <a href="javascript:history.back(-1)" class="button button-icon icon ion-chevron-left"></a>
+  <label class="item-input-wrapper">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="请输入关键字" class="search"  ng-model="search_key">
+  </label>
+  <button class="button button-clear" ng-click="vm.onclick_searchKeyword()">
+    搜索
+  </button>
+</ion-header-bar>
+
+<ion-view>
+  <ion-content >
+    <!-- <ion-refresher> 下拉刷新指令  -->
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="vm.doRefresh()"></ion-refresher>
+
+    <div class="default_list">
+      <div class=" o_item  "  ng-click="vm.order_all()"  ng-class="{true: 'active o_cur', false: ' '}[all_class]"     >
+        <span >默认</span>
+        <i></i>
+      </div>
+      <div class=" o_item"    ng-click="vm.order_sale()"   ng-class="{true: 'active o_cur', false: ' '}[sale_class]" >
+        <span>销量</span>
+        <i class="arrow"></i>
+      </div>
+      <div class=" o_item " ng-click="vm.order_PageViews()"  ng-class="{true: 'active o_cur', false: ' '}[pageViews_class]">
+        <span>人气</span>
+        <i></i>
+      </div>
+      <div class=" o_item" ng-click="vm.order_price()" ng-class="{true: 'active o_cur', false: ' '}[price_class]" >
+        <span>价格</span>
+        <i></i>
+      </div>
+    </div>
+
+    <div deckgrid source="items" cardTemplate="templates/deckgrid-card.html" class="deckgrid"></div>
+    <div ng-show="vm.moredata"  class="bottom_show"> 亲，数据加载完啦！</div>
+    <!-- ion-infinite-scroll 上拉加载数据指令 distance默认1% nf-if的值为false时，就禁止执行on-infinite  -->
+    <ion-infinite-scroll ng-if="!vm.moredata"  on-infinite="vm.loadMore()" distance="10%" ></ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>
+
+  <div ng-include="'templates/tabs2.html'"></div>
+
+

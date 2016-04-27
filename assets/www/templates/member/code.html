@@ -1,0 +1,21 @@
+<ion-view class="funds" view-title="扫描二维码">
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back"
+       nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content class="funds-content">
+    <div class="code_list" ng-repeat="receive in  receive_list.receive_list">
+      <span>{{receive.goods_name}}</span>
+      <span>数量：{{receive.receive_number}}</span>
+    </div>
+
+    <div class="code_img">
+      <h2>请物流司机扫描二维码：</h2>
+      <img src="{{imgurl+code.data.qrcode}}"  align="center">
+    </div>
+
+
+  </ion-content>
+</ion-view>

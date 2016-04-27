@@ -1,0 +1,27 @@
+
+
+<ion-view view-title="登陆">
+  <ion-content>
+    <from  name="fromTest">
+      <div class="login_from">
+        <div class="ion-person  input_w"></div>
+        <input type="tel" name="username" placeholder="请输入您的手机号码" class="input_border" ng-model="user.userName" ng-change="change(false)">
+      </div>
+      <div class="login_from">
+        <div class="ion-ios-unlocked-outline  input_w"></div>
+        <input type="password" name="password" placeholder="请输入密码" class="input_border" ng-model="user.password" ng-change="change(false)">
+      </div>
+      <div class="main_m">
+        <ion-toggle    ng-model="remember" toggle-class="toggle-assertive" ng-change="change(true)">记住密码？</ion-toggle>
+      </div>
+      <div class="main_m">
+        <button class="button button-assertive button-block" ng-click="userFrom()">
+          用户登录
+        </button>
+        <span class="left"><a href="#/forget-password" > 忘记密码？</a></span> <span class="right"><a href="#/user/register">申请成为会员</a></span>
+      </div>
+      <div class="logo_img" >
+      </div>
+    </from>
+  </ion-content>
+</ion-view>

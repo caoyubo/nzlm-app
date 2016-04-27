@@ -1,0 +1,31 @@
+<ion-view class="funds" view-title="我的主页" >
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back" nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content class="funds-content">
+    <div class="list">
+      <a class="item item-icon-right">
+        <span>农资店名： </span>
+        <span style="color: #a8a4a4">{{aboutInfo.am_store.am_store_name}}</span>
+      </a>
+      <a class="item item-icon-right">
+        <span>地址： </span>
+        <span style="color: #a8a4a4">{{aboutInfo.am_store.am_store_area_detail}}</span>
+      </a>
+      <a class="item item-icon-right">
+        <span>联系人：</span>
+        <span style="color: #a8a4a4">{{aboutInfo.am_store.am_store_owner}}</span>
+      </a>
+      <a class="item item-icon-right">
+        <span>联系电话： </span>
+        <span style="color: #a8a4a4">{{aboutInfo.am_store.am_store_phone}}</span>
+      </a>
+      <a class="item item-icon-right">
+        <span>农行账号： </span>
+        <span style="color: #a8a4a4">{{aboutInfo.bank_account.account_number}}</span>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,81 @@
+<ion-view>
+  <ion-content>
+    <div class="store_index">
+      <div class="store_banner">
+        <img src="{{store_info.store_banner}}" width="100%" height="120">
+
+        <div class="store_bg"></div>
+      </div>
+      <div class="store_text">
+        <div class="store_img">
+          <img src="{{store_info.store_logo}}" width="100%" height="80">
+        </div>
+        <div class="store_h">
+          <h2>{{store_info.store_name}}</h2>
+
+          <p>主营：农药化肥</p>
+        </div>
+      </div>
+    </div>
+    <div class="store_body">
+      <div class="store_mian">
+        <UL>
+          <Li  ng-repeat="item in classData"  ng-click="storeIndex.storeNav($index)"  ng-class="bg[$index]">{{item}}</Li>
+        </UL>
+      </div>
+
+      <!--图片轮番效果-->
+      <ion-slide-box ng-if="store_slide" on-slide-changed="slideHasChanged($index)" class="slidebox" auto-play="true"
+                     slide-interval="3000" delegate-handle="slideimgs" does-continue="true">
+        <ion-slide ng-repeat="data in store_slide">
+          <a href="">
+            <img src="{{data}}" width="100%">
+          </a>
+        </ion-slide>
+      </ion-slide-box>
+      <!--图片轮番效果 end-->
+
+      <div class="app-categoryShop" ng-if="type==0">
+        <div class="app-categoryShop-title">
+          <div class="title">新品热销</div>
+        </div>
+        <div class="app-categoryShop-list">
+          <ul>
+            <li ng-repeat="shop in store.recommended_goods_list">
+              <a href="#/goods/basic/{{shop.goods_id}}">
+                <div class="item-pic">
+                  <img src="{{imgurl+shop.goods_image}}">
+                </div>
+                <div class="shopName">
+                  <h2 class="title">{{shop.goods_name}}</h2>
+
+                  <p class="price">￥
+                    <text>{{shop.goods_price}}</text>
+                  </p>
+                </div>
+              </a></li>
+          </ul>
+        </div>
+        <div ng-show="store.moredata" class="bottom_show"> 亲，数据加载完啦！</div>
+      </div>
+    </div>
+    <div class="shop-category-nav" ng-if="type==3">
+      <div class="shop-category-frist-nav" ng-repeat="item in store.goods_class_list">
+        <a style="color:#FF4102;" href="#/store/search/{{item.store_id}}/{{item.stc_id}}/{{item.stc_name}}">{{item.stc_name}}</a>
+        <ul>
+          <li ng-repeat="(id,name) in item.children"><a href="#/store/search/{{item.store_id}}/{{item.stc_id}}/{{name.stc_name}}">{{name.stc_name}}</a></li>
+        </ul>
+      </div>
+      <div ng-if="store.goods_class_list.length <= 0">
+        <div class="bottom_show"><h4> 没有分类信息 </h4></div>
+      </div>
+
+    </div>
+
+
+  </ion-content>
+</ion-view>
+
+  <div ng-include="'templates/tabs2.html'"></div>
+
+

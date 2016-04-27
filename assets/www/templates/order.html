@@ -1,0 +1,82 @@
+<ion-header-bar class="bar-assertive category-header">
+  <a href="javascript:history.back(-1)" class="button button-icon icon ion-chevron-left"></a>
+
+  <h1 class="title">订单确认</h1>
+</ion-header-bar>
+<ion-view>
+  <ion-content class="has-header">
+    <div class="address">
+      <div class="address_img">
+        <img src="img/dz.png" width="100%">
+      </div>
+      <div class="addree_detail ">
+        <span>收货人：{{result.address_info.true_name}}</span>
+        <span>{{result.address_info.mob_phone}}</span>
+
+        <h2>收获地址：{{result.address_info.area_info+result.address_info.address}}</h2>
+
+        <!--<div class="rightion  ion-chevron-right"></div>-->
+      </div>
+    </div>
+
+    <div class="store" ng-repeat="(store_id,goods_list) in result.store_cart_list">
+      <h4>
+        <i class="store_shop_i"></i>
+        <span>{{goods_list[0].store_name}}</span>
+
+        <div class="store_edi"></div>
+      </h4>
+      <div class="store_shop_list">
+        <ul>
+          <li ng-repeat="goods_info in goods_list">
+            <a href="#/goods/basic/{{goods_info.goods_id}}">
+              <img src="{{imgurl+goods_info.goods_image}}" width="30%" align="left">
+            </a>
+
+            <div class="store_shop_list_right">
+              <span><a href="#/goods/basic/{{goods_info.goods_id}}">{{goods_info.goods_name}} </a></span>
+              <dd class="store_proice">
+                ￥<span>{{goods_info.goods_price}}</span>*{{goods_info.goods_num }}
+              </dd>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="item item-divider" ng-if="voucher_list[store_id].length>0">
+          请选择红包:
+      </div>
+      <div class="voucher_select"  ng-repeat="(id,name) in voucher_list" >
+        <div ng-repeat="(ids,names) in name"  ng-if="store_id==id">
+          <ion-radio name="choice{{id}}"    ng-click="order.serverSideChange('{{store_id}}','{{names.voucher_price}}','{{names.voucher_id}}','{{radio_type}}',names)">选择￥{{names.voucher_price}}元红包</ion-radio>
+        </div>
+      </div>
+
+
+      <div class="order_total">
+        <span>共</span>
+        <span>{{sub_total[store_id].num}}</span>
+        <span>件，</span>
+        <span></span>
+        <input type="hidden" value="{{sub_total[store_id].price-voucher_price}}" class="total-price-voucher{{store_id}}">
+        <span>合计：<span class="sub_total" >￥ <span class="total-voucher{{store_id}}">{{sub_total[store_id].price}}</span></span></span>
+      </div>
+    </div>
+    <div class="freight_total"> 运费:{{freight_total}}元</div>
+  </ion-content>
+</ion-view>
+
+<ion-footer-bar align-title="center" class="bar-positive bar-assertive">
+  <div class="store_footer">
+    <a  class="Settlement" ng-click="order.buy_order()">提交订单</a>
+    <div class="store_tital">
+      <span>共</span>
+      <span>{{total_num}}</span>
+      <span>件</span>
+      <span>总金额：</span>
+      <span class="price">￥{{total_price}}</span>
+
+    </div>
+
+  </div>
+</ion-footer-bar>

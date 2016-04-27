@@ -1,0 +1,108 @@
+<ion-view class="waiting-goods" view-title="{{title}}">
+  <ion-nav-bar class="funds-header">
+  </ion-nav-bar>
+  <ion-nav-buttons side="left">
+    <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back"
+       nav-direction="back"></a>
+  </ion-nav-buttons>
+  <ion-content class="waiting-goods-content">
+    <ion-refresher pulling-text="下拉刷新" on-refresh="orderPay.doRefresh()"></ion-refresher>
+    <div ng-repeat="(id,name) in items">
+      <div class="order-list " ng-repeat="(id_v,name_v)  in name.order_list">
+        <div class="row">
+          <div class="col">
+            {{name_v.store_name}}
+          </div>
+          <div class="col text-right">
+            <button class="button button-small button-outline" ng-click="orderPay.orderDetail({{name_v.order_id}})">
+              查看详情
+            </button>
+          </div>
+        </div>
+        <div class="order-goods-list">
+          <div class="order-goods-item" ng-repeat="goodslist in name_v.extend_order_goods">
+            <div class="row">
+              <div class="col col-20">
+                <img src="{{imgurl+goodslist.goods_image}}">
+              </div>
+              <div class="col col-60">
+                {{goodslist.goods_name}}
+              </div>
+              <div class="col text-right col-20">
+                {{goodslist.goods_price}}<br><span style="color:#9b9898;">x{{goodslist.goods_num}}</span><p ng-if="goodslist.receive_number>0">(实收:{{goodslist.receive_number}})</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-list">
+        <div class="row">
+          <p style="font-size: 10px;">总运费：￥{{name.shipment_fee}}&nbsp;&nbsp;&nbsp;<span style="color:red;font-size: 16px;float: right">支付单总价：￥{{name.pay_amount}} </span>
+          </p>
+        </div>
+        <div class="row row-no-padding padding-left padding-right">
+          <div class="col text-right ">
+            <button class="button button-small light  " ng-show="state=='state_new'" style="background: #ff7f00;"
+                    ng-click="orderPay.payment('{{name.pay_sn}}')">继续支付
+            </button>
+            <button class="button button-small light " ng-show="state=='state_pay'" style="background: #ff7f00;"
+                    ng-click="orderPay.receiveOrder('{{id}}')">确定收货
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div ng-show="orderPay.moredata" class="bottom_show"> 亲，数据加载完啦！</div>
+    <ion-infinite-scroll ng-if="!orderPay.moredata" on-infinite="orderPay.loadMore()"
+                         distance="1%"></ion-infinite-scroll>
+  </ion-content>
+
+
+  <div class="{{class_pro}}">
+  </div>
+  <div class="SelectAttributes_info" ng-class="{true:'SelectAttributes_info_show   SelectAttributes_h',false:''}[show_select]">
+    <div class="receive_title">确认收货</div>
+    <span class="colse  receive_colse"><img src="img/colse.jpg" ng-click="orderPay.colse()"> </span>
+
+    <div ng-repeat="goodslist in receive_list">
+      <div ng-repeat="name in goodslist.order_list">
+        <div class="receive" ng-repeat="orderlist in name.extend_order_goods" ng-if="orderlist.goods_state != 2">
+          <h2> {{orderlist.goods_name}}</h2>
+          <input type="hidden" name="pay_id" value="{{goodslist.pay_id}}">
+          <input type="hidden" name="goods_id" value="{{orderlist.goods_id}}">
+          <input type="hidden" name="order_id" value="{{orderlist.order_id}}">
+          <input type="hidden" name="receive_number{{orderlist.goods_id}}" value="{{orderlist.goods_num}}">
+          <div class="receive_num">
+            <span class="receive_num_text">确认数量:</span>
+            <span ng-click="orderPay.decrement('{{orderlist.goods_id}}')" class="select_number_sub">-</span>
+            <span class="count ng-binding   num{{orderlist.goods_id}} "> {{orderlist.goods_num}}</span>
+        <span ng-click="orderPay.increment('{{orderlist.goods_id}}',{{orderlist.goods_num}})"
+              class="select_number_add">+</span>
+            <span class="receive_num_text">购买数量：{{orderlist.goods_num}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="total_c">
+        合计：￥{{goodslist.pay_amount}}
+      </div>
+      <h3 class="receive_title">请为我们的物流司机给予评价！！！</h3>
+
+      <div class="evaluate_radio">
+        <span><input type="radio" name="my" value="2" checked="checked">满意<img src="img/ic_evaluate_good.png"></span>
+        <span><input type="radio" name="my" value="1">一般<img src="img/ic_evaluate_common.png"></span>
+        <span><input type="radio" name="my" value="0">不满意<img src="img/ic_evaluate_bad.png"></span>
+      </div>
+      <div class="button_qr">
+        <button class="button button-full transfer-others-button"  ng-click="orderPay.countersign()">
+          确认
+        </button>
+      </div>
+
+
+    </div>
+
+  </div>
+
+</ion-view>
+

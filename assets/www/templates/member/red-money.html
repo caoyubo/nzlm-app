@@ -1,0 +1,125 @@
+<ion-view class="funds" view-title="领红包">
+    <ion-nav-bar class="funds-header">
+    </ion-nav-bar>
+    <ion-nav-buttons side="left">
+        <a href="javascript:history.back(-1)" class="button button-icon light icon ion-ios-arrow-back"
+           nav-direction="back"></a>
+    </ion-nav-buttons>
+    <ion-content class="funds-content" style="background: #eeeeee;">
+
+        <ion-refresher pulling-text="下拉刷新" on-refresh="red_money.doRefresh()"></ion-refresher>
+
+
+
+
+        <div class="red-money-title">
+            <div class="unclaimed" ui-sref="red-money" nav-direction="forward">
+                <h2>领红包</h2>
+                <span>（即可领取的）</span>
+            </div>
+            <div class="get" ui-sref="myRed-money" nav-direction="forward">
+                <h2>我的</h2>
+                <span>（即已领取的）</span>
+            </div>
+            <div class="title">最新红包</div>
+        </div>
+
+        <div class="red-money-list">
+            <ul>
+                <a   ng-repeat="redMoney in items"    ng-click="red_money.voucher({{redMoney.voucher_id}})" >
+                <li  ng-if="redMoney.voucher_limit<101  && redMoney.voucher_limit>0"  class="yhj2" >
+                    <div class="left">
+                        <div class="left-money">
+                            <dt><span>￥</span>{{redMoney.voucher_price}}</dt>
+                        </div>
+                        <div class="right-text">
+                            <h2>优惠券</h2>
+                            <span>{{redMoney.voucher_title}}</span>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <i>立即<br/>领取</i>
+                        <span class="ion-chevron-right"></span>
+                    </div>
+                </li>
+                <li  ng-if="redMoney.voucher_limit>101 && redMoney.voucher_limit<201"  class="yhj3" >
+                        <div class="left">
+                            <div class="left-money">
+                                <dt><span>￥</span>{{redMoney.voucher_limit|number:0}}</dt>
+                            </div>
+                            <div class="right-text">
+                                <h2>优惠券</h2>
+                                <span>{{redMoney.voucher_title}}</span>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <i>立即<br/>领取</i>
+                            <span class="ion-chevron-right"></span>
+                        </div>
+                    </li>
+                    <li  ng-if="redMoney.voucher_limit>201 && redMoney.voucher_limit<301"  class="yhj4" >
+                        <div class="left">
+                            <div class="left-money">
+                                <dt><span>￥</span>{{redMoney.voucher_limit|number:0}}</dt>
+                            </div>
+                            <div class="right-text">
+                                <h2>优惠券</h2>
+                                <span>{{redMoney.voucher_title}}</span>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <i>立即<br/>领取</i>
+                            <span class="ion-chevron-right"></span>
+                        </div>
+                    </li>
+
+                    <li  ng-if="redMoney.voucher_limit>301 && redMoney.voucher_limit<401"  class="yhj5" >
+                        <div class="left">
+                            <div class="left-money">
+                                <dt><span>￥</span>{{redMoney.voucher_limit|number:0}}</dt>
+                            </div>
+                            <div class="right-text">
+                                <h2>优惠券</h2>
+                                <span>{{redMoney.voucher_title}}</span>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <i>立即<br/>领取</i>
+                            <span class="ion-chevron-right"></span>
+                        </div>
+                    </li>
+
+                    <li  ng-if="redMoney.voucher_limit>401"  class="yhj5" >
+                        <div class="left">
+                            <div class="left-money">
+                                <dt><span>￥</span>{{redMoney.voucher_limit|number:0}}</dt>
+                            </div>
+                            <div class="right-text">
+                                <h2>优惠券</h2>
+                                <span>{{redMoney.voucher_title}}</span>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <i>立即<br/>领取</i>
+                            <span class="ion-chevron-right"></span>
+                        </div>
+                    </li>
+                <div class="money-bottom">
+                    <h2>店铺:{{redMoney.voucher_storename}}</h2>
+                    <p>有效期限：{{redMoney.voucher_start_date*1000 | date:'yyyy-MM-dd'}}至{{redMoney.voucher_end_date*1000 | date:'yyyy-MM-dd'}}</p>
+                </div>
+                </a>
+
+
+
+            </ul>
+        </div>
+
+
+        <div ng-show="red_money.moredata"  class="bottom_show"> 亲，数据加载完啦！</div>
+        <!-- ion-infinite-scroll 上拉加载数据指令 distance默认1% nf-if的值为false时，就禁止执行on-infinite  -->
+        <ion-infinite-scroll ng-if="!red_money.moredata"  on-infinite="red_money.loadMore()" distance="10%" ></ion-infinite-scroll>
+
+
+    </ion-content>
+</ion-view>
